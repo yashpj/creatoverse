@@ -1,0 +1,22 @@
+.creator-card {
+  background-color: #1a1a1a; /* Dark theme style */
+  color: white;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.creator-url-link {
+  color: #646cff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.creator-description {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #ccc;
+}
