@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { useRoutes } from 'react-router-dom';
 import { supabase } from './client'; // Import the supabase client
 import ShowCreators from './pages/ShowCreators';
+import ViewCreator from './pages/ViewCreators';
+import AddCreator from './pages/AddCreator';
+import EditCreator from './pages/EditCreator';
 // ... other imports
 
 const App = () => {
@@ -19,11 +22,12 @@ const App = () => {
       if (error) {
         console.error('Error fetching creators:', error);
       } else {
+        console.log(JSON.stringify(data))
         setCreators(data);
       }
     };
 
-    fetchCreators(); // Call the function
+    fetchCreators();
   }, []);
 
   let element = useRoutes([
@@ -31,6 +35,18 @@ const App = () => {
       path: "/",
       element: <ShowCreators creators={creators} /> // Pass data as props
     },
+    {
+        path: "/view/:id",
+        element: <ViewCreator />
+    },
+    {
+        path: "/new",
+        element: <AddCreator />
+    },
+    {
+        path: "/edit/:id",
+        element: <EditCreator />
+    }
     // ... update other routes to receive creators if needed
   ]);
 

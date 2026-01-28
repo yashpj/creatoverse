@@ -1,10 +1,15 @@
 import React from 'react';
 import './Card.css';
+import { Link } from 'react-router-dom';
 
-const Card = ({ name, url, description, imageURL }) => {
+const Card = ({ id, name, url, description, imageURL }) => {
   return (
     <article className="creator-card">
       {/* 1. Displaying the Image (with a fallback) */}
+      <Link to={`/view/${id}`}>
+        <button>View Details</button>
+      </Link>
+
       <div className="image-container">
         {imageURL ? (
           <img src={imageURL} alt={name} className="creator-image" />

@@ -1,6 +1,7 @@
 // src/pages/ShowCreators.jsx
 import React from 'react';
 import Card from '../components/Card';
+import {Link} from 'react-router-dom';
 
 const ShowCreators = ({ creators }) => {
   return (
@@ -11,7 +12,7 @@ const ShowCreators = ({ creators }) => {
         {creators && creators.length > 0 ? (
           creators.map((creator) => (
             <Card 
-              key={creator.id}
+              id={creator.id}
               name={creator.name}
               url={creator.url}
               description={creator.description}
@@ -25,6 +26,10 @@ const ShowCreators = ({ creators }) => {
           </div>
         )}
       </section>
+      <header className="page-header">
+        <h1>Creatorverse</h1>
+        <Link to="/new"><button className="add-button">ADD A CREATOR</button></Link>
+    </header>
     </div>
   );
 };
