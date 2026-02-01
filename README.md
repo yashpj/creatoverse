@@ -33,14 +33,19 @@ The following **additional** features are implemented:
 * [x] **Sticky Navigation**: A global navigation bar stays at the top of the viewport to allow easy access to the creator list or the addition form.
 * [x] **Real-time Refresh**: Integrated the `useLocation` hook to automatically re-fetch creator data from Supabase whenever the user navigates back to the homepage.
 
-## Video Walkthrough
+![Video Walkthrough](./assets/walkthrough.gif)
 
 Here's a walkthrough of implemented required features:
 
 <img src='https://i.imgur.com/your-actual-gif-link.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-GIF created with **ScreenToGif**
+## Video Walkthrough
 
+Here's a walkthrough of implemented required features:
+
+<img src='./assets/creatoverse.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+GIF created with LiceCap
 ## Notes
 
 One of the biggest challenges was ensuring the homepage refreshed correctly after a new creator was added. By utilizing the `useLocation` hook as a dependency in the `useEffect` fetch call, I was able to ensure the UI stays in sync with the Supabase database without requiring a manual page refresh. Additionally, balancing the styles of Pico.css with custom CSS for the card grid required careful management of CSS specificity.
