@@ -1,11 +1,13 @@
 .creators-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
-  padding: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2.5rem;
+  padding: 1rem 0;
 }
 
-.page-header {
+.no-creators {
   text-align: center;
-  margin-top: 2rem;
+  padding: 5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
 }

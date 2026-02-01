@@ -1,22 +1,43 @@
 .creator-card {
-  background-color: #1a1a1a; /* Dark theme style */
-  color: white;
-  border-radius: 12px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 0; /* Let the image go to the edges */
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+}
+.creators-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Ensure items have width */
+  gap: 2rem;
+  padding: 2rem;
+  min-height: 100px; /* Force a minimum height to see if it appears */
+}
+.creator-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-.creator-url-link {
-  color: #646cff;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 0.9rem;
+.image-container {
+  height: 200px;
+  width: 100%;
+  background: #333;
 }
 
-.creator-description {
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #ccc;
+.creator-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.creator-content {
+  padding: 1.5rem;
+}
+
+.creator-name {
+  margin-top: 0;
+  color: #fff;
+  font-size: 1.5rem;
 }

@@ -1,58 +1,93 @@
-// src/App.jsx
 import React, { useState, useEffect } from 'react';
-import { useRoutes } from 'react-router-dom';
-import { supabase } from './client'; // Import the supabase client
+import { useRoutes, Link, useLocation } from 'react-router-dom';
+import { supabase } from './client';
 import ShowCreators from './pages/ShowCreators';
 import ViewCreator from './pages/ViewCreators';
 import AddCreator from './pages/AddCreator';
 import EditCreator from './pages/EditCreator';
-// ... other imports
 
 const App = () => {
-  const [creators, setCreators] = useState([]); // State to hold creators
+  const [creators, setCreators] = useState([]);
+  const location = useLocation(); // Tracks current URL to trigger refreshes
 
+  // Function to fetch all creators from Supabase
+  const fetchCreators = async () => {
+    const { data, error } = await supabase
+      .from('creators')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching creators:', error);
+    } else {
+      setCreators(data);
+    }
+  };
+
+  // Re-fetch creators whenever the user navigates to a new page
+  // This ensures the home page is always up-to-date after adding/editing
   useEffect(() => {
-    // Define the async function to fetch data
-    const fetchCreators = async () => {
-      const { data, error } = await supabase
-        .from('creators') // Ensure this matches your table name in Supabase
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        console.error('Error fetching creators:', error);
-      } else {
-        console.log(JSON.stringify(data))
-        setCreators(data);
-      }
-    };
-
     fetchCreators();
-  }, []);
+  }, [location]);
 
+  // Define the routes for the application
   let element = useRoutes([
     {
       path: "/",
-      element: <ShowCreators creators={creators} /> // Pass data as props
+      element: <ShowCreators creators={creators} />
     },
     {
-        path: "/view/:id",
-        element: <ViewCreator />
+      path: "/view/:id",
+      element: <ViewCreator />
     },
     {
-        path: "/new",
-        element: <AddCreator />
+      path: "/new",
+      element: <AddCreator />
     },
     {
-        path: "/edit/:id",
-        element: <EditCreator />
+      path: "/edit/:id",
+      element: <EditCreator />
     }
-    // ... update other routes to receive creators if needed
   ]);
 
   return (
     <div className="App">
-      {element}
+      {/* Global Navigation Bar */}
+      <nav className="main-nav" style={{ 
+        padding: '1rem 2rem', 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center',
+        background: 'rgba(0, 0, 0, 0.3)',
+        backdropFilter: 'blur(10px)',
+        position: 'sticky',
+        top: 0,
+        zIndex: 1000
+      }}>
+        <Link to="/" style={{ 
+          textDecoration: 'none', 
+          color: 'white', 
+          fontSize: '1.5rem', 
+          fontWeight: 'bold',
+          letterSpacing: '2px'
+        }}>
+          CREATORVERSE
+        </Link>
+        
+        <div style={{ display: 'flex', gap: '15px' }}>
+          <Link to="/">
+            <button className="secondary" style={{ margin: 0 }}>View All</button>
+          </Link>
+          <Link to="/new">
+            <button style={{ margin: 0 }}>Add a Creator</button>
+          </Link>
+        </div>
+      </nav>
+
+      {/* Main Content Area */}
+      <main style={{ padding: '2rem' }}>
+        {element}
+      </main>
     </div>
   );
 };

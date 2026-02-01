@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Standard for React Router 7
 import { supabase } from '../client';
-// import './AddCreator.css'; // You'll want some styling for this!
 
 const AddCreator = () => {
-    // 1. Create a state object to hold all form data
+    const navigate = useNavigate();
     const [creator, setCreator] = useState({
         name: "",
         url: "",
@@ -11,36 +11,29 @@ const AddCreator = () => {
         imageURL: ""
     });
 
-    // 2. Handle input changes dynamically
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setCreator((prev) => {
-            return {
-                ...prev,
-                [name]: value,
-            };
-        });
+        setCreator((prev) => ({ ...prev, [name]: value }));
     };
 
-    // 3. The async function to send data to Supabase
     const createCreator = async (event) => {
-        event.preventDefault(); // Prevents the page from refreshing
+        event.preventDefault();
 
-        const { error } = await supabase
+        const { data, error } = await supabase
             .from('creators')
             .insert({
                 name: creator.name, 
                 url: creator.url, 
                 description: creator.description, 
                 imageURL: creator.imageURL
-            })
-            .select();
+            });
 
         if (error) {
             console.error('Error adding creator:', error);
+            alert("Failed to add creator. Check console for details.");
         } else {
-            // Redirect to home page after success
-            window.location = "/";
+            // Use navigate to go back to the home page
+            navigate('/');
         }
     };
 
@@ -66,3 +59,4 @@ const AddCreator = () => {
 };
 
 export default AddCreator;
+
