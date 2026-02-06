@@ -43,7 +43,7 @@ Here's a walkthrough of implemented required features:
 
 Here's a walkthrough of implemented required features:
 
-<img src='./assets/creatoverse.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='./assets/creatoverse_2.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with LiceCap
 ## Notes
